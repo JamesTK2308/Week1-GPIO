@@ -90,7 +90,9 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   GPIO_PinState SwitchState[2]; // Now,last
+  GPIO_PinState SwitchState2[2];
   uint16_t LED1_HalfPeriod=500; // 1Hz
+  uint16_t LED2=0;
   uint32_t TimeStamp=0;
   uint32_t TimeStampButton=0;
   /* USER CODE END 2 */
@@ -111,14 +113,26 @@ int main(void)
 	SwitchState[0]= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10); // read PA10
 	if(SwitchState[1]== GPIO_PIN_SET && SwitchState[0]== GPIO_PIN_RESET)
 	{
+		if(LED1_HalfPeriod==1000)//0.5Hz to 1Hz
+		{
+			LED1_HalfPeriod =500;
+		}
 		//Change half Period of LED 1
-		if(LED1_HalfPeriod==500)
+		else if(LED1_HalfPeriod==500)//1Hz to 2Hz
 		{
 			LED1_HalfPeriod =250;
 		}
+		else if(LED1_HalfPeriod==250)//2Hz to 3 Hz
+		{
+			LED1_HalfPeriod =167;
+		}
+		else if(LED1_HalfPeriod==167)//2Hz to 3 Hz
+		{
+			LED1_HalfPeriod =1000;
+		}
 		else
 		{
-			LED1_HalfPeriod =500;
+			LED1_HalfPeriod =1000;
 		}
 	}
 	SwitchState[1]=SwitchState[0];
@@ -138,9 +152,25 @@ int main(void)
 		}
 
 	}
+	/////////////////////////////TASK2/////////////////////////
+	SwitchState2[0]= HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3); // read PA10
+	if(SwitchState2[1]== GPIO_PIN_SET && SwitchState2[0]== GPIO_PIN_RESET)
+	{
+		if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7)==GPIO_PIN_SET )
+		{
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_RESET);
+			LED2=1000;
+		}
+		else
+		{
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_SET);
+			LED2=0;
+		}
+	}
+	}
   }
   /* USER CODE END 3 */
-}
+
 
 /**
   * @brief System Clock Configuration
