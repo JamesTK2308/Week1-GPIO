@@ -93,13 +93,20 @@ int main(void)
   GPIO_PinState SwitchState2[2];
   GPIO_PinState SwitchState3[2];
   uint16_t LED1_HalfPeriod=1000; // 0.5Hz
-  uint16_t LED2=0;
+  uint16_t LED3_HalfPeriod=1000;
+  uint16_t SW3=0;
+  uint16_t LED31=0;
+  uint16_t LED32=0;
   uint32_t TimeStamp=0;
   uint32_t TimeStampButton=0;
+  uint32_t TimeStampButton2=0;
+  uint32_t TimeStampButton3=0;
   uint8_t count=0;
+  uint8_t counttime=0;
+
 
   enum{
-	  state0=0,state1,state2,state3,On=10,Off,
+	  Start=0,s1,s2,On,Off,t05=500,t15=1500
   };
   /* USER CODE END 2 */
 
@@ -126,7 +133,6 @@ int main(void)
 		{
 			LED1_HalfPeriod =500;
 		}
-		//Change half Period of LED 1
 		else if(LED1_HalfPeriod==500)//1Hz to 2Hz
 		{
 			LED1_HalfPeriod =250;
@@ -162,7 +168,9 @@ int main(void)
 		}
 
 	}
-	//Tast2///
+	////////////////////////////////Task2///////////////////////////////
+	if(HAL_GetTick()- TimeStampButton2 >=100){
+			TimeStampButton2 =HAL_GetTick();
 	if(SwitchState2[1]== GPIO_PIN_SET && SwitchState2[0]== GPIO_PIN_RESET){
 		count++;
 		if (count%2==0){
@@ -174,7 +182,22 @@ int main(void)
 	}
 	SwitchState2[1]=SwitchState2[0];
 	}
-	/////////////////////////////TASK2/////////////////////////
+	/////////////////////Task3//////////////////////////////////////////////
+
+    if(SwitchState3[1]== GPIO_PIN_SET && SwitchState3[0]== GPIO_PIN_RESET){
+//    	LED3_HalfPeriod =500;
+//    	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+    	counttime++;
+    	if (counttime%2==0)
+    	{
+    		if(HAL_GetTick()- TimeStampButton2 >=500){
+    			TimeStampButton2 =HAL_GetTick();
+    			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+    		}
+    	}
+    }
+    SwitchState3[1]=SwitchState3[0];
+	}
   /* USER CODE END 3 */
 
 }
