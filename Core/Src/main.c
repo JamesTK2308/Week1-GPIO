@@ -93,20 +93,18 @@ int main(void)
   GPIO_PinState SwitchState2[2];
   GPIO_PinState SwitchState3[2];
   uint16_t LED1_HalfPeriod=1000; // 0.5Hz
-  uint16_t LED3_HalfPeriod=1000;
-  uint16_t SW3=0;
-  uint16_t LED31=0;
-  uint16_t LED32=0;
+  uint16_t LED3_HalfPeriod=500;
   uint32_t TimeStamp=0;
+  uint32_t TimeStampSW3=0;
   uint32_t TimeStampButton=0;
   uint32_t TimeStampButton2=0;
   uint32_t TimeStampButton3=0;
   uint8_t count=0;
   uint8_t counttime=0;
-
+  uint8_t c=0;
 
   enum{
-	  Start=0,s1,s2,On,Off,t05=500,t15=1500
+	  Start=0,s1,s2,On1,Off1,On2,Off2
   };
   /* USER CODE END 2 */
 
@@ -183,21 +181,51 @@ int main(void)
 	SwitchState2[1]=SwitchState2[0];
 	}
 	/////////////////////Task3//////////////////////////////////////////////
+//	if(HAL_GetTick()- TimeStampButton >=100){
+//		TimeStampButton =HAL_GetTick();
 
-    if(SwitchState3[1]== GPIO_PIN_SET && SwitchState3[0]== GPIO_PIN_RESET){
-//    	LED3_HalfPeriod =500;
-//    	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-    	counttime++;
-    	if (counttime%2==0)
-    	{
-    		if(HAL_GetTick()- TimeStampButton2 >=500){
-    			TimeStampButton2 =HAL_GetTick();
-    			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-    		}
-    	}
-    }
-    SwitchState3[1]=SwitchState3[0];
-	}
+		if (SwitchState3[1] == GPIO_PIN_SET
+				&& SwitchState3[0] == GPIO_PIN_RESET) {
+
+			counttime++;
+
+		}
+		SwitchState3[1] = SwitchState3[0];
+		//}
+		c = counttime % 2;
+		switch (c) {
+		case 0:
+			if (HAL_GetTick() - TimeStampSW3 >= LED3_HalfPeriod) {
+				TimeStampSW3 = HAL_GetTick();
+				//Toggle LED3
+				if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET) {
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+					LED3_HalfPeriod = 500;
+				} else {
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+					LED3_HalfPeriod = 1500;
+				}
+
+			}
+			break;
+		case 1:
+			if (HAL_GetTick() - TimeStampSW3 >= LED3_HalfPeriod) {
+				TimeStampSW3 = HAL_GetTick();
+				//Toggle LED3
+				if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET) {
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+					LED3_HalfPeriod = 1500;
+				} else {
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+					LED3_HalfPeriod = 500;
+				}
+
+			}
+			break;
+		}
+
+
+  }
   /* USER CODE END 3 */
 
 }
