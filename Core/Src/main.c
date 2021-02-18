@@ -93,7 +93,7 @@ int main(void)
   GPIO_PinState SwitchState2[2];
   GPIO_PinState SwitchState3[2];
   uint16_t LED1_HalfPeriod=1000; // 0.5Hz
-  uint16_t LED3_HalfPeriod=500;
+  uint16_t LED3_time=0;
   uint32_t TimeStamp=0;
   uint32_t TimeStampSW3=0;
   uint32_t TimeStampButton=0;
@@ -195,29 +195,29 @@ int main(void)
 		c = counttime % 2;
 		switch (c) {
 		case 0:
-			if (HAL_GetTick() - TimeStampSW3 >= LED3_HalfPeriod) {
+			if (HAL_GetTick() - TimeStampSW3 >= LED3_time) {
 				TimeStampSW3 = HAL_GetTick();
 				//Toggle LED3
 				if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET) {
 					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
-					LED3_HalfPeriod = 500;
+					LED3_time = 500;
 				} else {
 					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-					LED3_HalfPeriod = 1500;
+					LED3_time = 1500;
 				}
 
 			}
 			break;
 		case 1:
-			if (HAL_GetTick() - TimeStampSW3 >= LED3_HalfPeriod) {
+			if (HAL_GetTick() - TimeStampSW3 >= LED3_time) {
 				TimeStampSW3 = HAL_GetTick();
 				//Toggle LED3
 				if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET) {
 					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
-					LED3_HalfPeriod = 1500;
+					LED3_time = 1500;
 				} else {
 					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-					LED3_HalfPeriod = 500;
+					LED3_time = 500;
 				}
 
 			}

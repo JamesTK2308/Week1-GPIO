@@ -2898,26 +2898,26 @@ OUTPUT(Week1_GPIO.elf elf32-littlearm)
  .debug_line    0x0000000000003727      0x8ed Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
  .debug_line    0x0000000000004014      0xfa3 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
 
-.debug_str      0x0000000000000000    0x80eab
- .debug_str     0x0000000000000000    0x7f66e Core/Src/main.o
-                                      0x7f934 (size before relaxing)
- .debug_str     0x000000000007f66e       0x56 Core/Src/stm32f4xx_hal_msp.o
+.debug_str      0x0000000000000000    0x80ea5
+ .debug_str     0x0000000000000000    0x7f668 Core/Src/main.o
+                                      0x7f92e (size before relaxing)
+ .debug_str     0x000000000007f668       0x56 Core/Src/stm32f4xx_hal_msp.o
                                       0x7f712 (size before relaxing)
- .debug_str     0x000000000007f6c4       0xbd Core/Src/stm32f4xx_it.o
+ .debug_str     0x000000000007f6be       0xbd Core/Src/stm32f4xx_it.o
                                       0x7f1ec (size before relaxing)
- .debug_str     0x000000000007f781       0xc4 Core/Src/system_stm32f4xx.o
+ .debug_str     0x000000000007f77b       0xc4 Core/Src/system_stm32f4xx.o
                                       0x7f1f8 (size before relaxing)
- .debug_str     0x000000000007f845       0x36 Core/Startup/startup_stm32f411retx.o
+ .debug_str     0x000000000007f83f       0x36 Core/Startup/startup_stm32f411retx.o
                                          0x58 (size before relaxing)
- .debug_str     0x000000000007f87b      0x919 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_str     0x000000000007f875      0x919 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
                                       0x7fb6d (size before relaxing)
- .debug_str     0x0000000000080194      0x399 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_str     0x000000000008018e      0x399 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
                                       0x7f94a (size before relaxing)
- .debug_str     0x000000000008052d      0x1fe Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_str     0x0000000000080527      0x1fe Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
                                       0x7f437 (size before relaxing)
- .debug_str     0x000000000008072b      0x259 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_str     0x0000000000080725      0x259 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
                                       0x7f5e5 (size before relaxing)
- .debug_str     0x0000000000080984      0x527 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_str     0x000000000008097e      0x527 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
                                       0x7fa32 (size before relaxing)
 
 .comment        0x0000000000000000       0x7b
